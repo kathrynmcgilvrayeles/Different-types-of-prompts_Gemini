@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Prompt Types</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #d2f0f0;
+      margin: 0;
+      padding: 20px;
+      color: #1f2a52;
+    }
+    .tabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .tab {
+      background-color: #abb5bf;
+      border-radius: 12px;
+      width: 160px;
+      height: 126px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: background 0.3s, border 0.3s;
+    }
+    .tab.active {
+      background-color: #00bec7;
+      border-color: #e72582;
+    }
+    .tab img {
+      width: 160px;
+      height: 126px;
+      border-radius: 12px;
+    }
+    .content {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 50%;
+      min-width: 320px;
+    }
+    .content img {
+      margin-top: 20px;
+      width: 100%;
+      max-width: 600px;
+      border-radius: 12px;
+      display: none;
+    }
+    .content img.visible {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="tabs">
+    <div class="tab active" data-tab="short">
+      <img src="Short%20prompts.png" alt="Short Prompts">
+    </div>
+    <div class="tab" data-tab="chat">
+      <img src="Chat.png" alt="Chat">
+    </div>
+    <div class="tab" data-tab="bots">
+      <img src="Bots%20or%20Agents.png" alt="Bots or Agents">
+    </div>
+    <div class="tab" data-tab="integrated">
+      <img src="Integrated.png" alt="Integrated">
+    </div>
+  </div>
+
+  <div class="content" id="tab-content">
+    <div id="short">
+      <p>Short prompts are used for efficient tasks like fixing spelling/grammar, re-writing sentences/paragraphs, quick comprehension checks, boosting engagement, and targeted skill practice, making learning more accessible and focused.</p>
+    </div>
+    <div id="chat" style="display:none">
+      <p>When chatting or brainstorming with your AI teammate, use concise inputs for quick ideas, broad exploration, and rapid refinement in a back-and-forth conversation. This method guides the AI more effectively by ensuring faster processing, better focus, and clearer iteration.</p>
+    </div>
+    <div id="bots" style="display:none">
+      <p>For deep exploration with an AI agent, users provide extensive, detailed input to establish a persistent persona or explore a defined topic. It may contain defined complex multi-step tasks, supply comprehensive background data, and ensure consistent, specific outputs over time. It's about setting up a highly specialised AI partner for ongoing, in-depth work.</p>
+    </div>
+    <div id="integrated" style="display:none">
+      <p>We can use prompts that are integrated with Google products like Gmail, Docs, Sheets, and Slides. You can see the prompt at the top of the document, or select the Gemini icon on the right-hand side to open the prompt panel.</p>
+      <img src="Gemini%20in%20docs.png" alt="Gemini in Docs" class="visible" id="integrated-img" />
+    </div>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const contents = document.querySelectorAll('.content > div');
+    const integratedImage = document.getElementById('integrated-img');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const tabId = tab.dataset.tab;
+        contents.forEach(content => {
+          content.style.display = content.id === tabId ? 'block' : 'none';
+        });
+
+        if (tabId === 'integrated') {
+          integratedImage.classList.add('visible');
+        } else {
+          integratedImage.classList.remove('visible');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
